@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(120deg, rgb(117, 230, 211), #ACD1E9, #6D929B);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.memory-board {
+    height: 85vh;
+    width: 85vh;
+    background-color: #F5FAFA;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.memory-board-card {
+    height: calc(25% - 10px);
+    width: calc(25% - 10px);
+    position: relative; /*like this I can position the children absolutely, relative to it*/
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 1px rgb(255, 171, 52);
+    transform: scale(1); /*to create click effect*/
+    transition: transform 0.5s;
+}
+
+.front-of-card {
+    transform: rotateY(180deg);
+}
+
+.front-of-card, .back-of-card {
+    height: 100%;
+    width: 100%;
+    position: absolute; /*to stack the front on top of the back*/
+    border-radius: 5px;
+    margin: 0px;
+    object-fit: cover;
+    backface-visibility: hidden; 
+    background: rgb(255, 255, 255);
+}
+
+/*click effect*/
+.memory-board-card:active {
+    transform: scale(0.96);
+    transition: transform 0.3s;
+}
+
+/*flips card*/
+.memory-board-card.flip {
+    transform: rotateY(180deg);
+}
