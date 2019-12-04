@@ -40,7 +40,8 @@ body {
     transform: rotateY(180deg);
 }
 
-.front-of-card, .back-of-card {
+.front-of-card, 
+.back-of-card {
     height: 100%;
     width: 100%;
     position: absolute; /*to stack the front on top of the back*/
