@@ -21,7 +21,7 @@ body {
     border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
-    perspective: 1000px; /*add 3d effect*/
+    perspective: 1000px;
 }
 
 .memory-board-card {
@@ -33,22 +33,21 @@ body {
     box-shadow: 0 0 1px 1px rgb(255, 171, 52);
     transform: scale(1); /*to create click effect*/
     transition: transform 0.5s;
-    transform-style: preserve-3d; /*add 3d effect*/
+    transform-style: preserve-3d;
 }
 
 .front-of-card {
     transform: rotateY(180deg);
 }
 
-.front-of-card, 
-.back-of-card {
+.front-of-card, .back-of-card {
     height: 100%;
     width: 100%;
     position: absolute; /*to stack the front on top of the back*/
     border-radius: 5px;
     margin: 0px;
     object-fit: cover;
-    backface-visibility: hidden; 
+    backface-visibility: hidden; /*hides the back of the card when flipping*/
     background: rgb(255, 255, 255);
 }
 
