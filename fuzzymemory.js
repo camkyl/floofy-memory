@@ -55,5 +55,12 @@ function flipCard() {
 cards.forEach(card => card.addEventListener('click', flipCard));
 
 // function to shuffle cards
-
+// Immediately Invoked Function Expression:
+// https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+(function shuffle() {
+    cards.forEach(card => {
+        let randomPosition = Math.floor(Math.random() * 16);
+        card.style.order = randomPosition;
+    })
+})();
 
