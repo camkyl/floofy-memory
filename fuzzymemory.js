@@ -43,13 +43,53 @@ const generateMemoryCard = () => {
     })
 };
 
+// printing cards to memory board
 generateMemoryCard();
 
 // function and event to flip cards
 const cards = document.querySelectorAll('.memory-board-card');
 
+// function to match cards
+let hasFlippedCard = false;
+let firstCard;
+let secondCard;
+
 function flipCard() {
-    this.classList.toggle('flip');
+    this.classList.add('flip');
+
+    if(!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this; // if the user has flipped one card, the flipped card becomes firstCard
+        return;
+    }
+    
+    secondCard = this;
+    hasFlippedCard = false;
+    
+    checkForMatchingCard();
+}
+
+function checkForMatchingCard() {
+    if(firstCard.dataset.id === secondCard.dataset.id) {
+        disableCards();
+        return;
+    }
+
+    unflipCards();
+
+}
+
+
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+}
+
+function unflipCards() {
+    setTimeout(()=> {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+    }, 1500);
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
@@ -63,4 +103,3 @@ cards.forEach(card => card.addEventListener('click', flipCard));
         card.style.order = randomPosition;
     })
 })();
-
