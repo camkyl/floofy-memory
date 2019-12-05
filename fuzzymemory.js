@@ -58,38 +58,44 @@ function flipCard() {
     this.classList.add('flip');
 
     if(!hasFlippedCard) {
+        // first click/flip
         hasFlippedCard = true;
         firstCard = this; // if the user has flipped one card, the flipped card becomes firstCard
-        return;
+        console.log(hasFlippedCard, firstCard); // true, class="memory-board-card flip"
+        return; 
+    } else {
+        //second click/flip
+        secondCard = this;
+        hasFlippedCard = false;
+        console.log(hasFlippedCard, secondCard); // false, class="memory-board-card flip"
     }
-    
-    secondCard = this;
-    hasFlippedCard = false;
-    
+    // when two cards are clicked/flipped, check if they are matching
     checkForMatchingCard();
 }
 
+// checking if the two clicked cards are matching by comparing their dataset name
 function checkForMatchingCard() {
-    if(firstCard.dataset.id === secondCard.dataset.id) {
-        disableCards();
+    if(firstCard.dataset.icon === secondCard.dataset.icon) {
+        console.log(firstCard.dataset.icon, secondCard.dataset.icon);
+        disableCards(); //cards are matching, remove eventListener ('click', flipCard) so the user can't click the card again
         return;
+    } else {
+        unflipCards(); //cards are not matching, removing flip class so the back of the card is showing again
     }
-
-    unflipCards();
-
 }
 
-
+// removing eventListener so the user can't click the card again  
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
 }
 
+// removing flip class so the back of the card is showing again
 function unflipCards() {
     setTimeout(()=> {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-    }, 1500);
+    }, 1000);
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));

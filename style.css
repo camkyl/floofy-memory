@@ -21,7 +21,7 @@ body {
     border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
-    perspective: 1000px;
+    perspective: 1000px; /*gives a 3d effect*/
 }
 
 .memory-board-card {
