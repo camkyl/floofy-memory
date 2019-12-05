@@ -60,6 +60,10 @@ function flipCard() {
         return; // return from function if lockCards is true so the rest of the function won't get executed
     } 
 
+    if(this === firstCard) {
+        return; // avoid double click on one card to be considered a match
+    }
+
     this.classList.add('flip');
 
     if(!hasFlippedCard) {
