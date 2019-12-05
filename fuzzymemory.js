@@ -46,15 +46,24 @@ const generateMemoryCard = () => {
 // printing cards to memory board
 generateMemoryCard();
 
-// function and event to flip cards
+// variable selecting all cards
 const cards = document.querySelectorAll('.memory-board-card');
 
 // function to match cards
 let hasFlippedCard = false;
+let lockCards = false; // avoid two sets of cards being turned at the same time
 let firstCard;
 let secondCard;
 
 function flipCard() {
+    if(lockCards) {
+        return; // return from function if lockCards is true so the rest of the function won't get executed
+    } 
+
+    if(this === firstCard) {
+        return; // avoid double click on one card to be considered a match
+    }
+
     this.classList.add('flip');
 
     if(!hasFlippedCard) {
@@ -92,10 +101,14 @@ function disableCards() {
 
 // removing flip class so the back of the card is showing again
 function unflipCards() {
+    lockCards = true;
+
     setTimeout(()=> {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-    }, 1000);
+
+        lockCards = false;
+    }, 800);
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
