@@ -38,8 +38,8 @@ const duplicateCards = [...memoryCards, ...memoryCards];
 // function rendering the image elements to the DOM and append them to the memory board
 const generateMemoryCard = () => {
     duplicateCards.forEach(card => {
-        const element = createMemoryCard(card.image, card.id);
-        memoryBoard.appendChild(stringToHTML(element));
+        const image = createMemoryCard(card.image, card.id);
+        memoryBoard.appendChild(stringToHTML(image));
     })
 };
 
@@ -85,23 +85,20 @@ function flipCard() {
         // first click/flip
         hasFlippedCard = true;
         firstCard = this; // if the user has flipped one card, the flipped card becomes firstCard
-        //console.log(hasFlippedCard, firstCard); // true, class="memory-board-card flip"
         return; 
     } else {
         //second click/flip
         secondCard = this;
         hasFlippedCard = false;
-        //console.log(hasFlippedCard, secondCard); // false, class="memory-board-card flip"
     }
 
     // when two cards are clicked/flipped, check if they are matching
-    checkForMatchingCard();
+    checkIfCardsMatch();
 }
 
 // function checking if the two clicked cards are matching by comparing their dataset name
-const checkForMatchingCard = () => {
+const checkIfCardsMatch = () => {
     if(firstCard.dataset.icon === secondCard.dataset.icon) {
-        //console.log(firstCard.dataset.icon, secondCard.dataset.icon);
         //cards are matching, remove eventListener ('click', flipCard) so the user can't click the card again
         disableCards(); 
         return;
@@ -144,3 +141,24 @@ cards.forEach(card => {
     card.addEventListener('click', flipCard);
     }
 );
+
+// reset game button
+const resetGameButton = document.querySelector('.reset-game');
+
+// function reseting the game after the user has finished it
+const resetGame = () => {
+    cards.forEach(card => {
+        card.classList.remove('flip');
+    })
+
+    reinstateCards();
+};
+
+// function bringing cards back to original position, otherwise cards stays locked from the previous game
+const reinstateCards = () => {
+    cards.forEach(card => {
+        card.addEventListener('click', flipCard);
+    })
+}
+
+resetGameButton.addEventListener('click', resetGame);
