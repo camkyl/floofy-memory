@@ -62,3 +62,11 @@ body {
 .memory-board-card.flip {
     transform: rotateY(180deg);
 }
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    border: 1px solid black;
+}
