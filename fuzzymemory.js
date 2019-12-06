@@ -14,15 +14,15 @@ const memoryCards = [
 // selecting the section element with class "memory-board"
 const memoryBoard = document.querySelector('.memory-board');
 
-// Helper function to prevent XSS injections
-// Creates an HTML element from string
+// function helping to prevent XSS injections
+// creates an HTML element from string
 const stringToHTML = str => {
     const div = document.createElement("div");
     div.innerHTML = str;
     return div.firstChild;
   };
 
-// create memory card template
+// function creating memory card template
 // back-of-card is the side that is shown when the game starts
 // front-of-card is the side which the user is going to match
 const createMemoryCard = (image, id) => {
@@ -32,10 +32,10 @@ const createMemoryCard = (image, id) => {
         </div>`;
 };
 
-// duplicating cards
+// duplicating array with cards
 const duplicateCards = [...memoryCards, ...memoryCards];
 
-// Render the image element to the DOM
+// function rendering the image elements to the DOM and append them to the memory board
 const generateMemoryCard = () => {
     duplicateCards.forEach(card => {
         const element = createMemoryCard(card.image, card.id);
@@ -43,25 +43,40 @@ const generateMemoryCard = () => {
     })
 };
 
-// printing cards to memory board
+// printing cards to memory board when user loads the page
 generateMemoryCard();
 
 // variable selecting all cards
 const cards = document.querySelectorAll('.memory-board-card');
 
-// function to match cards
+// function shuffling cards by randomizing their position
+const shuffle = () => {
+    cards.forEach(card => {
+        let randomPosition = Math.floor(Math.random() * 16);
+        card.style.order = randomPosition;
+    })
+};
+
+// calls the shuffle function every time the page is reloaded
+shuffle();
+
 let hasFlippedCard = false;
-let lockCards = false; // avoid two sets of cards being turned at the same time
 let firstCard;
 let secondCard;
+// avoid two sets of cards being turned at the same time
+let lockCards = false; 
 
+// function flipping card
+// using a regular function here because I want .this to represent the card
 function flipCard() {
+    // return from function if lockCards is true so the rest of the function won't get executed
     if(lockCards) {
-        return; // return from function if lockCards is true so the rest of the function won't get executed
+        return; 
     } 
 
+    // avoid double click on a single card to be considered a match
     if(this === firstCard) {
-        return; // avoid double click on one card to be considered a match
+        return; 
     }
 
     this.classList.add('flip');
@@ -70,55 +85,62 @@ function flipCard() {
         // first click/flip
         hasFlippedCard = true;
         firstCard = this; // if the user has flipped one card, the flipped card becomes firstCard
-        console.log(hasFlippedCard, firstCard); // true, class="memory-board-card flip"
+        //console.log(hasFlippedCard, firstCard); // true, class="memory-board-card flip"
         return; 
     } else {
         //second click/flip
         secondCard = this;
         hasFlippedCard = false;
-        console.log(hasFlippedCard, secondCard); // false, class="memory-board-card flip"
+        //console.log(hasFlippedCard, secondCard); // false, class="memory-board-card flip"
     }
+
     // when two cards are clicked/flipped, check if they are matching
     checkForMatchingCard();
 }
 
-// checking if the two clicked cards are matching by comparing their dataset name
-function checkForMatchingCard() {
+// function checking if the two clicked cards are matching by comparing their dataset name
+const checkForMatchingCard = () => {
     if(firstCard.dataset.icon === secondCard.dataset.icon) {
-        console.log(firstCard.dataset.icon, secondCard.dataset.icon);
-        disableCards(); //cards are matching, remove eventListener ('click', flipCard) so the user can't click the card again
+        //console.log(firstCard.dataset.icon, secondCard.dataset.icon);
+        //cards are matching, remove eventListener ('click', flipCard) so the user can't click the card again
+        disableCards(); 
         return;
     } else {
-        unflipCards(); //cards are not matching, removing flip class so the back of the card is showing again
+        //cards are not matching, removing flip class so the back of the card is showing again
+        unflipCards(); 
     }
-}
+};
 
-// removing eventListener so the user can't click the card again  
-function disableCards() {
+// function removing eventListener to prevent the cards from being flipped again
+const disableCards = () => {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
-}
 
-// removing flip class so the back of the card is showing again
-function unflipCards() {
+    resetBoard();
+};
+
+// function removing flip class so the back of the card is showing again
+const unflipCards = () => {
     lockCards = true;
 
-    setTimeout(()=> {
+    setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
 
-        lockCards = false;
+        resetBoard();
     }, 800);
-}
+};
 
-cards.forEach(card => card.addEventListener('click', flipCard));
+// for the lockCard function to work, first and second card needs to be set to null
+const resetBoard = () => {
+    hasFlippedCard = false;
+    lockCards = false;
+    firstCard = null;
+    secondCard = null;
+};
 
-// function to shuffle cards
-// Immediately Invoked Function Expression:
-// https://developer.mozilla.org/en-US/docs/Glossary/IIFE
-(function shuffle() {
-    cards.forEach(card => {
-        let randomPosition = Math.floor(Math.random() * 16);
-        card.style.order = randomPosition;
-    })
-})();
+// looping through each card and applying the flipCard function
+cards.forEach(card => {
+    card.addEventListener('click', flipCard);
+    }
+);
