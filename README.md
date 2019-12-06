@@ -1,4 +1,4 @@
-# Floofy memory game :dog:
+# Floofy memory :dog:
 
 <img src="https://media.giphy.com/media/7K3p2z8Hh9QOI/giphy.gif" width="100%">
 
