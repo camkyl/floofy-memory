@@ -1,14 +1,14 @@
 'use strict';
 
 const memoryCards = [
-    {image: "./images/cool.png", id: "cool"},
-    {image: "./images/crazy-face.png", id: "crazy"},
-    {image: "./images/exploding-head.png", id: "explode"},
-    {image: "./images/face-vomiting.png", id: "vomit"},
-    {image: "./images/partying-face.png", id: "party"},
-    {image: "./images/pig-nose.png", id: "pig"},
-    {image: "./images/poop.png", id: "poop"},
-    {image: "./images/rolling-eyes.png", id: "rolling"}
+    {image: "./images/toy.jpg", id: "1"},
+    {image: "./images/ball.jpg", id: "2"},
+    {image: "./images/henlo.jpg", id: "3"},
+    {image: "./images/octopus.jpg", id: "4"},
+    {image: "./images/sitting.jpg", id: "5"},
+    {image: "./images/smile.jpg", id: "6"},
+    {image: "./images/forest.jpg", id: "7"},
+    {image: "./images/puppy.jpg", id: "8"}
 ];
 
 // selecting the section element with class "memory-board"
@@ -28,7 +28,7 @@ const stringToHTML = str => {
 const createMemoryCard = (image, id) => {
     return `<div class="memory-board-card" data-icon="${id}">
         <img class="front-of-card" src="${image}">
-        <img class="back-of-card" src="images/palmtree.png">    
+        <img class="back-of-card" src="images/paw.svg">    
         </div>`;
 };
 
@@ -125,7 +125,7 @@ const unflipCards = () => {
         secondCard.classList.remove('flip');
 
         resetBoard();
-    }, 800);
+    }, 1000);
 };
 
 // for the lockCard function to work, first and second card needs to be set to null
@@ -152,6 +152,7 @@ const resetGame = () => {
     })
 
     reinstateCards();
+    shuffle();
 };
 
 // function bringing cards back to original position, otherwise cards stays locked from the previous game
