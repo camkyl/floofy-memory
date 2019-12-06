@@ -18,4 +18,4 @@ Click on this link to enter the game board.
 
 ## Authors
 
-@camiwd
+Camilla Kylmänen Sjörén
