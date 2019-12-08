@@ -17,6 +17,9 @@ Click on this link to enter the game board. The rules are simple: click on a car
 
 :video_game: Name
 
+## Code review
+
+
 ## Authors
 
 Camilla Kylmänen Sjörén
