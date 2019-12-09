@@ -1,107 +1,107 @@
 * {
-    box-sizing: border-box;
-    margin: 0px;
-    font-size: 14px;
-    font-family: 'Ubuntu', sans-serif;
+  box-sizing: border-box;
+  margin: 0px;
+  font-size: 14px;
+  font-family: "Ubuntu", sans-serif;
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
-    background-image: url('images/dogtheme.jpg');
-    background-position: center;
-    background-size: cover;
-    /* background: linear-gradient(120deg, rgb(117, 230, 211), #ACD1E9, #6D929B); */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("images/dogtheme.jpg");
+  background-position: center;
+  background-size: cover;
+  /* background: linear-gradient(120deg, rgb(117, 230, 211), #ACD1E9, #6D929B); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
-    width: 100vw;
-    background-color: rgba(255, 255, 255, 0.4);
-    display: flex;
-    justify-content: center;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
 }
 
 h1 {
-    font-size: 49px;
-    font-family: 'Luckiest Guy', sans-serif;
-    -webkit-text-fill-color: burlywood;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-    margin: 10px 0 0 0;
+  font-size: 49px;
+  font-family: "Luckiest Guy", sans-serif;
+  -webkit-text-fill-color: burlywood;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin: 10px 0 0 0;
 }
 
 .memory-board {
-    height: 85vh;
-    width: 85vh;
-    background-color: white;
-    border: 1px solid burlywood;
-    border-radius: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    perspective: 1000px; /*gives a 3d effect*/
+  height: 85vh;
+  width: 85vh;
+  background-color: white;
+  border: 2px solid burlywood;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px; /*gives a 3d effect*/
 }
 
 .memory-board-card {
-    height: calc(25% - 12px);
-    width: calc(25% - 12px);
-    position: relative; /*like this I can position the children absolutely, relative to it*/
-    margin: 6px;
-    border-radius: 5px;
-    box-shadow: 0 0 1px 1px rgb(250, 206, 152);
-    transform: scale(1); /*to create click effect*/
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: calc(25% - 12px);
+  width: calc(25% - 12px);
+  position: relative; /*like this I can position the children absolutely, relative to it*/
+  margin: 6px;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 0.4px rgb(250, 206, 152);
+  transform: scale(1); /*to create click effect*/
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .front-of-card {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.front-of-card, 
+.front-of-card,
 .back-of-card {
-    height: 100%;
-    width: 100%;
-    position: absolute; /*to stack the front on top of the back*/
-    border-radius: 5px;
-    margin: 0px;
-    object-fit: cover;
-    backface-visibility: hidden; /*hides the back of the card when flipping*/
+  height: 100%;
+  width: 100%;
+  position: absolute; /*to stack the front on top of the back*/
+  border-radius: 5px;
+  margin: 0px;
+  object-fit: cover;
+  backface-visibility: hidden; /*hides the back of the card when flipping*/
 }
 
 img.back-of-card {
-    height: 50%;
-    width: 50%;
-    object-fit: fill;
-    transform: rotate(20deg);
+  height: 50%;
+  width: 50%;
+  object-fit: fill;
+  transform: rotate(20deg);
 }
 
 /*click effect*/
 .memory-board-card:active {
-    transform: scale(0.96);
-    transition: transform 0.3s;
+  transform: scale(0.96);
+  transition: transform 0.3s;
 }
 
 /*flips card*/
 .memory-board-card.flip {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .reset-game {
-    cursor: pointer;
-    color: rgb(158, 123, 76);
-    text-transform: uppercase;
-    font-weight: bolder;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 8px;
+  cursor: pointer;
+  color: rgb(158, 123, 76);
+  text-transform: uppercase;
+  font-weight: bolder;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 8px;
 }
 
 .reset-game:hover {
-    border: 1px solid black;
+  border: 1px solid black;
 }
