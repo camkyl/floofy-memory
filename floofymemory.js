@@ -104,7 +104,7 @@ const checkIfCardsMatch = () => {
     // function creating a small delay before the sound is played
     setTimeout(() => {
       correctMove.play();
-    }, 300);
+    }, 250);
 
     disableCards();
     return;
@@ -116,7 +116,7 @@ const checkIfCardsMatch = () => {
     // function creating a small delay before the sound is played
     setTimeout(() => {
       wrongMove.play();
-    }, 300);
+    }, 250);
   }
 };
 
@@ -137,7 +137,7 @@ const unflipCards = () => {
     secondCard.classList.remove("flip");
 
     resetBoard();
-  }, 1000);
+  }, 900);
 };
 
 // for the lockCard function to work, first and second card needs to be set to null
